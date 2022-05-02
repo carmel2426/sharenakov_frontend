@@ -16,6 +16,7 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     //
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
           title: Text(
             'Login',
@@ -67,7 +68,7 @@ class Login extends StatelessWidget {
                 child: Text("Login"),
                 onPressed: () {
                   navigateToLoginPage(context);
-                  createData(nameController.text, passwordController.text);
+                  login(nameController.text, passwordController.text);
                 },
               ),
             )

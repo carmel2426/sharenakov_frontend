@@ -4,6 +4,9 @@ import 'get_a_product.dart';
 import 'give_a_product.dart';
 import 'server.dart';
 import 'alert_dialog.dart';
+import 'dist.dart';
+
+LocationService pos = LocationService();
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -44,10 +47,11 @@ class _HomePageState extends State<HomePage> {
               decoration: BoxDecoration(color: Colors.lightBlue.withOpacity(0.2)),
               child: ElevatedButton(
                 child: Text("Give a product"),
-                onPressed: () {
+                onPressed: () async {
                   //navigate to give a product
                   Navigator.push(context, MaterialPageRoute(builder: (context) => give_a_product()));
-                  getProducts();
+                  await pos.checkGps();
+                  // getProducts();
 
                 },
               )),

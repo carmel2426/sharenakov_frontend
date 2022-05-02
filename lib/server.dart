@@ -1,14 +1,23 @@
+import 'dart:convert';
+
 import 'package:carmel_project/product.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
-var loginUri = "http://127.0.0.1:5000/login";
+var loginUri = "http://10.0.2.2:5000/login";
 
+Dio dio = Dio();
 
-Future check_exist_database(String name, String password) async {
-  final response = await Dio().get(loginUri);
+Future login(String name, String password) async {
+  final response = await dio.post(loginUri, data: jsonEncode({
+    "name": name,
+    "password": password,
+  }));
+  print(response);
+  return response.data;
 }
-var signupUri = "http://127.0.0.1:5000/signup";
+
+var signupUri = "http://10.0.2.2:5000/signup";
 
 Future createData(String name, String password) async {
   final response = await http
@@ -22,11 +31,11 @@ Future createData(String name, String password) async {
   } catch (e) {}
 }
 
-String productUrl = "http://127.0.0.1:5000/product";
+String productUrl = "http://10.0.2.2:5000/product";
 
 Future createProduct(String radius, String product, String description,
     String latitude, String longtitude) async {
-  final response = await http.post(Uri.parse(productUrl), body: {
+  final response = await dio.post(productUrl, data: {
     'radius': radius,
     'product': product,
     'description': description,
@@ -43,8 +52,10 @@ Future createProduct(String radius, String product, String description,
   print(response);
 }
 
-Future<List<ProductModel>> getProducts() async {
-  final response = await Dio().get(productUrl);
-  List<ProductModel> products = (response.data as List<dynamic>).map((e) => ProductModel.fromMap(e)).toList();
+Future<List<ProductModel>> getProducts(String latitude, String longitude) async {
+  final response = await Dio().get(productUrl + "?latitude=$latitude&longitude=$longitude");
+  List<ProductModel> products = (response.data as List<dynamic>)
+      .map((e) => ProductModel.fromMap(e))
+      .toList();
   return products;
 }

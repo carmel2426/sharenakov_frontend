@@ -3,8 +3,6 @@ import 'dart:math';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
 
-
-
 class dist extends StatelessWidget {
   const dist({Key? key}) : super(key: key);
 
@@ -15,6 +13,14 @@ class dist extends StatelessWidget {
 }
 
 class LocationService {
+  static final LocationService _singleton = LocationService._();
+
+  LocationService._();
+
+  factory LocationService() {
+    return _singleton;
+  }
+
   bool servicestatus = false;
   bool haspermission = false;
   late LocationPermission permission;
@@ -49,7 +55,8 @@ class LocationService {
   }
 
   getLocation() async {
-    position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
     print(position.longitude); //Output: 80.24599079
     print(position.latitude); //Output: 29.6593457
 
@@ -63,7 +70,8 @@ class LocationService {
     );
 
     StreamSubscription<Position> positionStream =
-        Geolocator.getPositionStream(locationSettings: locationSettings).listen((Position position) {
+        Geolocator.getPositionStream(locationSettings: locationSettings)
+            .listen((Position position) {
       print(position.longitude); //Output: 80.24599079
       print(position.latitude); //Output: 29.6593457
 
@@ -77,9 +85,17 @@ class LocationService {
     var p = 0.017453292519943295;
     var a = 0.5 -
         cos((location2.latitude - location1.latitude) * p) / 2 +
-        cos(31.49 * p) * cos(location2.latitude * p) * (1 - cos((location2.longitude - location1.longitude) * p)) / 2;
+        cos(31.49 * p) *
+            cos(location2.latitude * p) *
+            (1 - cos((location2.longitude - location1.longitude) * p)) /
+            2;
 
     var d = 2 * r * asin(sqrt(a));
     return d;
+  }
+
+  @override
+  String toString() {
+    return 'LocationService{long: $long, lat: $lat}';
   }
 }
