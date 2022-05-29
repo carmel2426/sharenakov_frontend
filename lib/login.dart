@@ -1,3 +1,4 @@
+import 'package:carmel_project/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'server.dart';
 import 'home_page.dart';
@@ -8,8 +9,12 @@ class Login extends StatelessWidget {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future navigateToLoginPage(context) async {
+  Future navigateToHomePage(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+  }
+
+  Future navigateToSignUpPage(context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => signUp()));
   }
 
   @override
@@ -66,12 +71,26 @@ class Login extends StatelessWidget {
               height: 40,
               child: ElevatedButton(
                 child: Text("Login"),
-                onPressed: () {
-                  navigateToLoginPage(context);
-                  login(nameController.text, passwordController.text);
+                onPressed: () async{
+                  // getProducts("4.2222", "4.2222");
+                  String exist = await login(nameController.text, passwordController.text);
+                  print(exist);
+                  if(exist == "True")
+                    navigateToHomePage(context);
                 },
               ),
-            )
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            SizedBox(
+                width: 80,
+                height: 40,
+                child: ElevatedButton(
+                    child: Text("Sign Up"),
+                    onPressed: () {
+                      navigateToSignUpPage(context);
+                    })),
           ],
         ),
       ),

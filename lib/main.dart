@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
 import 'light_theme.dart';
-
 void main() {
   runApp(ShareNakov());
 }

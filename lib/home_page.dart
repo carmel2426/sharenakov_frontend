@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            'Login',
+            'Start',
             style: TextStyle(fontSize: 46, color: Colors.orangeAccent),
           ),
           centerTitle: true,
@@ -49,9 +49,9 @@ class _HomePageState extends State<HomePage> {
                 child: Text("Give a product"),
                 onPressed: () async {
                   //navigate to give a product
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => give_a_product()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => GiveProduct()));
                   await pos.checkGps();
-                  // getProducts();
+                  getProducts("32.2222", "32.2222");
 
                 },
               )),
@@ -72,7 +72,8 @@ class _HomePageState extends State<HomePage> {
       ])),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          dialog(context, "Give", "You can give a product");
+          dialog(context, "Give/Get", "Give - you can give a product to the other users "
+              "Get - you can ask for a product from the other users");
         },
         child: Icon(Icons.help_outline),
         backgroundColor: Colors.deepOrange,

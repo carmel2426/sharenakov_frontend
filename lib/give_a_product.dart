@@ -7,14 +7,14 @@ import 'package:objectid/objectid.dart';
 import 'add_a_product.dart';
 import 'dist.dart';
 
-class give_a_product extends StatefulWidget {
-  const give_a_product({Key? key}) : super(key: key);
+class GiveProduct extends StatefulWidget {
+  const GiveProduct({Key? key}) : super(key: key);
 
   @override
-  _give_a_productState createState() => _give_a_productState();
+  _GiveProductState createState() => _GiveProductState();
 }
 
-class _give_a_productState extends State<give_a_product> {
+class _GiveProductState extends State<GiveProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +34,7 @@ class _give_a_productState extends State<give_a_product> {
             }
 
             List<ProductModel> products = snapshot.data!;
+            print(products);
             return Column(
               children: products.map((e) => Product(product: e)).toList(),
             );
