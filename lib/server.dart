@@ -1,16 +1,9 @@
-import 'dart:convert';
-
-import 'package:carmel_project/post_model.dart';
 import 'package:carmel_project/product.dart';
 import 'package:dio/dio.dart';
-
-// import 'package:http/http.dart' as http;
-// import 'package:http/http.dart';
+Dio dio = Dio();
 String baseUrl = "https://vm120.hisham.ru/";
 
 var loginUri = baseUrl + "login";
-
-Dio dio = Dio();
 
 Future<String> login(String name, String password) async {
   final response = await dio.post(loginUri, data: {
@@ -23,8 +16,14 @@ Future<String> login(String name, String password) async {
 
 var signupUri = baseUrl + "signUp";
 
-Future createData(String name, String password, String number) async {
-  final response = await dio.post(signupUri, data: {"name": name, "password": password, "number": number});
+Future createData(String name, String password, String number, String latitude, String longtitude) async {
+  final response = await dio.post(signupUri, data: {
+    "name": name,
+    "password": password,
+    "number": number,
+    'latitude': latitude,
+    'longtitude': longtitude
+  });
   print(response);
   return response.data;
 }

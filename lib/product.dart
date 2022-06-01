@@ -25,45 +25,52 @@ class _ProductState extends State<Product> {
   Widget build(BuildContext context) {
     return Visibility(
       visible: vi,
-      child: Row(
-        children: [
-          SizedBox(
-            width: 8,
-          ),
-          Text(widget.product.nickname),
-          SizedBox(
-            width: 8,
-          ),
-          Text(widget.product.name),
-          SizedBox(
-            width: 4,
-          ),
-          Text(widget.product.radius + " km"),
-          SizedBox(
-            width: 4,
-          ),
-          IconButton(
-              onPressed: () {
-                vi = false;
-                setState(() {});
-              },
-              icon: Icon(Icons.highlight_remove)),
-          SizedBox(
-            width: 4,
-          ),
-          IconButton(
-            onPressed: () async{
-              var number = await get_Number(widget.product.nickname);
-              print(number.runtimeType);
-              print(number.toString());
-              dialog(context, "Number", number.toString());
+      child: Row(children: [
+        SizedBox(
+          width: 8,
+        ),
+        Text(widget.product.nickname),
+        SizedBox(
+          width: 8,
+        ),
+        Text(widget.product.name),
+        SizedBox(
+          width: 4,
+        ),
+        Text(widget.product.radius + " km"),
+        SizedBox(
+          width: 4,
+        ),
+        IconButton(
+            onPressed: () {
               vi = false;
               setState(() {});
             },
-            icon: Icon(Icons.check_circle_outline_rounded),
-          )
-        ],
-      ),
+            icon: Icon(Icons.highlight_remove)),
+        SizedBox(
+          width: 4,
+        ),
+        IconButton(
+          onPressed: () async {
+            var number = await get_Number(widget.product.nickname);
+            print(number.runtimeType);
+            print(number.toString());
+            dialog(context, "Number", number.toString());
+            vi = false;
+            setState(() {});
+          },
+          icon: Icon(Icons.check_circle_outline_rounded),
+        ),
+        SizedBox(
+          width: 8,
+        ),
+        IconButton(
+          onPressed: () {
+            dialog(context, "Description", widget.product.description);
+          },
+          icon: Icon(Icons.help_outline),
+        )
+      ]),
     );
   }
 }
@@ -100,7 +107,8 @@ class ProductModel {
           radius == other.radius);
 
   @override
-  int get hashCode => nickname.hashCode ^ location.hashCode ^ id.hashCode ^ description.hashCode ^ name.hashCode ^ radius.hashCode;
+  int get hashCode =>
+      nickname.hashCode ^ location.hashCode ^ id.hashCode ^ description.hashCode ^ name.hashCode ^ radius.hashCode;
 
   @override
   String toString() {

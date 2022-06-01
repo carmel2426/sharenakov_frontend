@@ -1,10 +1,6 @@
-
 import 'package:carmel_project/product.dart';
 import 'package:carmel_project/server.dart';
 import 'package:flutter/material.dart';
-import 'package:latlng/latlng.dart';
-import 'package:objectid/objectid.dart';
-import 'add_a_product.dart';
 import 'dist.dart';
 
 class GiveProduct extends StatefulWidget {

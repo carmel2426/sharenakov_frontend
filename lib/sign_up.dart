@@ -1,6 +1,8 @@
+import 'package:carmel_project/login%20(2).dart';
 import 'package:flutter/material.dart';
 import 'server.dart';
 import 'home_page.dart';
+import 'dist.dart';
 
 class signUp extends StatefulWidget {
   const signUp({Key? key}) : super(key: key);
@@ -10,7 +12,13 @@ class signUp extends StatefulWidget {
 }
 
 Future navigateToHomePage(context) async {
+  Navigator.pop(context);
   Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+}
+
+Future navigateToLoginPage(context) async {
+  Navigator.pop(context);
+  Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
 }
 
 class _signUpState extends State<signUp> {
@@ -18,6 +26,8 @@ class _signUpState extends State<signUp> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController numberController = TextEditingController();
   final key = GlobalKey<FormState>();
+  LocationService pos = LocationService();
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +49,12 @@ class _signUpState extends State<signUp> {
                 height: 180,
               ),
               Container(
-                  height: 180,
+                  height: 220,
                   child: Column(
                     children: [
                       Container(
                         child: TextField(
+                          // validator: (value),
                           controller: nameController,
                           decoration: InputDecoration(
                               fillColor: Colors.orange,
@@ -53,7 +64,7 @@ class _signUpState extends State<signUp> {
                         width: 200,
                       ),
                       SizedBox(
-                        height: 28,
+                        height: 14,
                       ),
                       Container(
                         child: TextFormField(
@@ -71,16 +82,16 @@ class _signUpState extends State<signUp> {
                         width: 200,
                       ),
                       SizedBox(
-                        height: 38,
+                        height: 14,
                       ),
                       Container(
                         child: TextFormField(
-                        validator: (value) {
-                          if (int.tryParse(value!) == null) {
-                            return "the number must be digits";
-                          }
-                          return null;
-                        },
+                          validator: (value) {
+                            if (int.tryParse(value!) == null) {
+                              return "the number must be digits";
+                            }
+                            return null;
+                          },
                           controller: numberController,
                           decoration: InputDecoration(hintText: "number", hintStyle: TextStyle(color: Colors.grey)),
                         ),
@@ -89,7 +100,7 @@ class _signUpState extends State<signUp> {
                     ],
                   )),
               SizedBox(
-                height: 40,
+                height: 80,
               ),
               SizedBox(
                 width: 80,
@@ -98,15 +109,23 @@ class _signUpState extends State<signUp> {
                   child: Text("Sign Up"),
                   onPressed: () {
                     if (key.currentState!.validate()) {
-                      print(nameController.text);
-                      print(passwordController.text);
-                      print(numberController.text);
-                      createData(nameController.text, passwordController.text, numberController.text);
+                      createData(nameController.text, passwordController.text, numberController.text, pos.lat, pos.long);
                       navigateToHomePage(context);
                     }
                   },
                 ),
-              )
+              ),
+              // SizedBox(
+              //   height: 80,
+              // ),
+              // SizedBox(
+              //     width: 80,
+              //     height: 40,
+              //     child: ElevatedButton(
+              //         child: Text("Login"),
+              //         onPressed: () {
+              //           navigateToLoginPage(context);
+              //         }))
             ],
           ),
         ),
