@@ -44,14 +44,12 @@ Future createProduct(String radius, String product, String description, String l
 
 String productUrl2 = baseUrl + "give_product";
 
-Future<List<ProductModel>> getProducts(String latitude, String longitude) async {
+Future<String> getProducts() async {
+  print("1111111111111111111111111");
   final response = await Dio().get(productUrl2, queryParameters: {
-    "latitude": latitude,
-    "longtitude": longitude
   });
-  List<ProductModel> products = (response.data as List<dynamic>).map((e) => ProductModel.fromMap(e)).toList();
-  print(products);
-  return products;
+
+  return response.data.toString();
 }
 
 var product8Uri = baseUrl + "get_number";

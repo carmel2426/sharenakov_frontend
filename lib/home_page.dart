@@ -37,10 +37,8 @@ class _HomePageState extends State<HomePage> {
                 child: Text("Give a product"),
                 onPressed: () async {
                   //navigate to give a product
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => GiveProduct()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => give_product()));
                   await pos.checkGps();
-                  getProducts("32.2222", "32.2222");
-
                 },
               )),
           SizedBox(

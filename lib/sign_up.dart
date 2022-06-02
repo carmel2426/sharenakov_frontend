@@ -107,10 +107,11 @@ class _signUpState extends State<signUp> {
                 height: 40,
                 child: ElevatedButton(
                   child: Text("Sign Up"),
-                  onPressed: () {
+                  onPressed: () async {
                     if (key.currentState!.validate()) {
                       createData(nameController.text, passwordController.text, numberController.text, pos.lat, pos.long);
                       navigateToHomePage(context);
+                      print("*************************************************");
                     }
                   },
                 ),

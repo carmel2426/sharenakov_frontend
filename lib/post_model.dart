@@ -1,26 +1,37 @@
+import 'package:carmel_project/product.dart';
+import 'package:flutter/material.dart';
+import 'alert_dialog.dart';
+class Product extends StatelessWidget {
+  Product({Key? key, required this.product_text}) : super(key: key);
+  String product_text;
 
-class Post {
-  final String nickname;
-  final int userId;
-  final int id;
-  final String title;
-  final String body;
-
-  Post({
-    required this.nickname,
-    required this.userId,
-    required this.id,
-    required this.title,
-    required this.body,
-  });
-
-  factory Post.fromJson(Map<String, dynamic> json) {
-    return Post(
-      nickname: json['nickname'] as String,
-      userId: json['userId'] as int,
-      id: json['id'] as int,
-      title: json['title'] as String,
-      body: json['body'] as String,
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(product_text),
+        IconButton(
+            onPressed: () {
+              // vi = false;
+            },
+            icon: Icon(Icons.highlight_remove)),
+        IconButton(
+          onPressed: () {
+            // var number = await get_Number(widget.product.nickname);
+            // dialog(context, "Number", number.toString());
+            // vi = false;
+          },
+          icon: Icon(Icons.check_circle_outline_rounded),
+        ),
+        IconButton(
+          onPressed: () {
+            // dialog(context, "Description", widget.product.description);
+          },
+          icon: Icon(Icons.help_outline),
+        )
+      ],
     );
   }
+
+
 }
