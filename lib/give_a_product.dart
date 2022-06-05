@@ -25,23 +25,47 @@ class _give_productState extends State<give_product> {
     List<Widget> requests = [];
     print(products);
     print(products.isNotEmpty);
+    int i = 1;
     while (products.toString() != "[]") {
-      String z = products.removeAt(0);
-      List q = z.split(",");
-      String name = q[1].toString().split(":")[1];
-      print(name);
-      String radius = q[2].toString().split(":")[1];
-      print(radius);
-      String product = q[3].toString().split(":")[1];
-      print(product);
-      String s = name + radius + product;
-      print(s);
-      requests.add(Product(product_text: s));
-      print("..........................");
-      print(products);
-      print(products.isNotEmpty);
-      print("......................................................");
+      if (i != 2) {
+        String z = products.removeAt(0);
+        List q = z.split(",");
+        String name = q[ i ].toString().split(":")[1];
+        print(name);
+        String radius = q[ i + 1 ].toString().split(":")[1];
+        print(radius);
+        String product = q[ i + 2 ].toString().split(":")[1];
+        print(product);
+        String s = name + radius + product;
+        print(s);
+        requests.add(Product(product_text: s, Nickname: name,));
+        print("..........................");
+        print(products);
+        print(products.isNotEmpty);
+        print("......................................................");
+        i = 2;
+      }
+      if (i == 2) {
+        String z = products.removeAt(0);
+        List q = z.split(",");
+        String name = q[ i ].toString().split(":")[1];
+        print(name);
+        String radius = q[ i + 1 ].toString().split(":")[1];
+        print(radius);
+        String product = q[ i + 2 ].toString().split(":")[1];
+        print(product);
+        String s = name + radius + product;
+        print(s);
+        requests.add(Product(product_text: s, Nickname: name,));
+        print("..........................");
+        print(products);
+        print(products.isNotEmpty);
+        print("......................................................");
+      }
+
     }
+
+
     print("requests");
     return requests;
   }

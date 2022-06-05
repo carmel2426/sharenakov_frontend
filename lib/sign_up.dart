@@ -108,11 +108,15 @@ class _signUpState extends State<signUp> {
                 child: ElevatedButton(
                   child: Text("Sign Up"),
                   onPressed: () async {
-                    if (key.currentState!.validate()) {
+                    var user_exist = createData(nameController.text, passwordController.text, numberController.text, pos.lat, pos.long);
+                    print(user_exist);
+                    if (key.currentState!.validate() && user_exist != true) {
                       createData(nameController.text, passwordController.text, numberController.text, pos.lat, pos.long);
                       navigateToHomePage(context);
                       print("*************************************************");
                     }
+
+
                   },
                 ),
               ),

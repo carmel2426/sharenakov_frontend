@@ -63,6 +63,10 @@ class get_a_product extends StatelessWidget {
                     child: Text("Submit"),
                     onPressed: () {
                       pos.checkGps();
+                      print("1111111111111111111111111");
+                      print(pos.lat);
+                      print("1111111111111111111111111");
+                      print(pos.long);
                       createProduct(radiusController.text, productController.text, decriptionController.text, pos.lat, pos.long);
                     }))
           ],

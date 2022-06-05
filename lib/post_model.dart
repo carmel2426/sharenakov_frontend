@@ -1,37 +1,50 @@
 import 'package:carmel_project/product.dart';
+import 'package:carmel_project/server.dart';
 import 'package:flutter/material.dart';
 import 'alert_dialog.dart';
-class Product extends StatelessWidget {
-  Product({Key? key, required this.product_text}) : super(key: key);
+class Product extends StatefulWidget {
+  Product({Key? key, required this.product_text, required this.Nickname}) : super(key: key);
   String product_text;
+  String Nickname;
+  @override
+  State<Product> createState() => _ProductState();
+}
+
+class _ProductState extends State<Product> {
+  bool vi = true;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(product_text),
-        IconButton(
-            onPressed: () {
-              // vi = false;
+    return Visibility(visible: vi,
+    child: Row(
+        children: [
+          Text(widget.product_text),
+          IconButton(
+              onPressed: () {
+                vi = false;
+                setState((){});
+              },
+              icon: Icon(Icons.highlight_remove)),
+          IconButton(
+            onPressed: () async{
+              print("...........................................");
+              print(widget.product_text.toString());
+              var number = await get_Number(widget.Nickname);
+              print("...........................................");
+              print(widget.Nickname);
+              dialog(context, "Number", number.toString());
+              vi = false;
             },
-            icon: Icon(Icons.highlight_remove)),
-        IconButton(
-          onPressed: () {
-            // var number = await get_Number(widget.product.nickname);
-            // dialog(context, "Number", number.toString());
-            // vi = false;
-          },
-          icon: Icon(Icons.check_circle_outline_rounded),
-        ),
-        IconButton(
-          onPressed: () {
-            // dialog(context, "Description", widget.product.description);
-          },
-          icon: Icon(Icons.help_outline),
-        )
-      ],
+            icon: Icon(Icons.check_circle_outline_rounded),
+          ),
+          IconButton(
+            onPressed: () {
+              dialog(context, "Description", "2222222222");
+            },
+            icon: Icon(Icons.help_outline),
+          )
+        ],
+      ),
     );
   }
-
-
 }
