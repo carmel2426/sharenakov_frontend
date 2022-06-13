@@ -21,26 +21,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            'Login',
+            'Start',
             style: TextStyle(fontSize: 46, color: Colors.orangeAccent),
           ),
           centerTitle: true,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back),
-          ),
           backgroundColor: Colors.deepOrange),
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [
-        // Container(
-        //     height: 180,
-        //     child: Center(
-        //         child: Text(
-        //       "",
-        //       style: TextStyle(fontSize: 80, color: Colors.green),
-        //     ))),
+
         Container(
             child: Column(children: [
           Container(
@@ -49,10 +37,8 @@ class _HomePageState extends State<HomePage> {
                 child: Text("Give a product"),
                 onPressed: () async {
                   //navigate to give a product
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => give_a_product()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => give_product()));
                   await pos.checkGps();
-                  // getProducts();
-
                 },
               )),
           SizedBox(
@@ -62,9 +48,9 @@ class _HomePageState extends State<HomePage> {
               decoration: BoxDecoration(color: Colors.lightBlue.withOpacity(0.2)),
               child: ElevatedButton(
                 child: Text(" get a Product"),
-                onPressed: () {
+                onPressed: () async {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => get_a_product()));
-                  pos.checkGps();
+                  await pos.checkGps();
                 },
               )),
               SizedBox(height: 388,)
@@ -72,7 +58,8 @@ class _HomePageState extends State<HomePage> {
       ])),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          dialog(context, "Give", "You can give a product");
+          dialog(context, "Give/Get", "Give - you can give a product to the other users "
+              "Get - you can ask for a product from the other users");
         },
         child: Icon(Icons.help_outline),
         backgroundColor: Colors.deepOrange,

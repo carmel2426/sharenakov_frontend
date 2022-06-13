@@ -1,43 +1,115 @@
-
 import 'package:carmel_project/product.dart';
 import 'package:carmel_project/server.dart';
 import 'package:flutter/material.dart';
-import 'package:latlng/latlng.dart';
-import 'package:objectid/objectid.dart';
-import 'add_a_product.dart';
 import 'dist.dart';
+import 'post_model.dart';
+import 'dart:convert';
 
-class give_a_product extends StatefulWidget {
-  const give_a_product({Key? key}) : super(key: key);
-
+class give_product extends StatefulWidget {
   @override
-  _give_a_productState createState() => _give_a_productState();
+  State<give_product> createState() => _give_productState();
 }
 
-class _give_a_productState extends State<give_a_product> {
+class _give_productState extends State<give_product> {
+  string_to_list(String s) {
+    s = s.replaceAll("[", "");
+    s = s.replaceAll("]", "");
+    // s = s.replaceAll(",", ".");
+    List s2 = s.split("}");
+    return s2;
+  }
+  // products.toString() != "[]"
+  Products_list() async {
+    String x = await getProducts();
+    List products = string_to_list(x);
+    List<Widget> requests = [];
+    print(products);
+    print(products.isNotEmpty);
+    int i = 1;
+    while (products.length > 1) {
+      if (i == 2) {
+        String z = products.removeAt(0);
+        List q = z.split(",");
+        String id = q[ 0 ].toString().split(":")[1];
+        String name = q[ i ].toString().split(":")[1];
+        String radius = q[ i + 1 ].toString().split(":")[1];
+        String product = q[ i + 2 ].toString().split(":")[1];
+        String description = q[ i + 3 ].toString().split(":")[1];
+        print(id);
+        String s = name + radius + product;
+        requests.add(Product(product_text: s, Nickname: name, Description: description, Id: id));
+      }
+      if (i != 2) {
+        String z = products.removeAt(0);
+        List q = z.split(",");
+        String id = q[ 0 ].toString().split(":")[1];
+        String name = q[ i ].toString().split(":")[1];
+        String radius = q[ i + 1 ].toString().split(":")[1];
+        String product = q[ i + 2 ].toString().split(":")[1];
+        String description = q[ i + 3 ].toString().split(":")[1];
+        print(id);
+        String s = name + radius + product;
+        requests.add(Product(product_text: s, Nickname: name, Description: description, Id: id));
+        i = 2;
+      }
+    }
+    return requests;
+
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Give a product"),
-        ),
-        body: FutureBuilder<List<ProductModel>>(
-          future: () async {
-            LocationService service = LocationService();
-            await service.checkGps();
-            print("SERVICE fds fuiosdbui  $service");
-            return await getProducts(service.lat, service.long);
-          }(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError || !snapshot.hasData) {
-              return CircularProgressIndicator();
-            }
-
-            List<ProductModel> products = snapshot.data!;
-            return Column(
-              children: products.map((e) => Product(product: e)).toList(),
+    return FutureBuilder(
+        future: Products_list(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Scaffold(
+                appBar: AppBar(
+                    title: Text(
+                      'Product',
+                      style: TextStyle(fontSize: 46, color: Colors.orange),
+                    ),
+                    backgroundColor: Colors.deepOrangeAccent),
+                body: Center(
+                    child: ListView(
+                      children: snapshot.data as List<Widget>,
+                    )));
+          } else {
+            return Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
             );
-          },
-        ));
+          }
+        });
   }
 }
+
+// }
+// class _GiveProductState extends State<GiveProduct> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//         appBar: AppBar(
+//           title: Text("Give a product"),
+//         ),
+//         body: FutureBuilder<List<ProductModel>>(
+//           future: () async {
+//             LocationService service = LocationService();
+//             await service.checkGps();
+//             print("SERVICE fds fuiosdbui  $service");
+//             return await getProducts(service.lat, service.long);
+//           }(),
+//           builder: (context, snapshot) {
+//             if (snapshot.hasError || !snapshot.hasData) {
+//               return CircularProgressIndicator();
+//             }
+//
+//             List<ProductModel> products = snapshot.data!;
+//             print(products);
+//             return Column(
+//               children: products.map((e) => Product(product: e)).toList(),
+//             );
+//           },
+//         ));
+//   }

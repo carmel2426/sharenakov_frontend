@@ -62,6 +62,10 @@ class get_a_product extends StatelessWidget {
                 child: ElevatedButton(
                     child: Text("Submit"),
                     onPressed: () {
+                      const snackBar = SnackBar(
+                        content: Text('Yay! your product sent'),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       pos.checkGps();
                       createProduct(radiusController.text, productController.text, decriptionController.text, pos.lat, pos.long);
                     }))
