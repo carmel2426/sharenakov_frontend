@@ -18,7 +18,11 @@ class _give_productState extends State<give_product> {
     List s2 = s.split("}");
     return s2;
   }
+<<<<<<< HEAD
   // products.toString() != "[]"
+=======
+
+>>>>>>> a32d4af89cc690373c19f97e7628c4ddc8a92760
   Products_list() async {
     String x = await getProducts();
     List products = string_to_list(x);
@@ -26,6 +30,7 @@ class _give_productState extends State<give_product> {
     print(products);
     print(products.isNotEmpty);
     int i = 1;
+<<<<<<< HEAD
     while (products.length > 1) {
       if (i == 2) {
         String z = products.removeAt(0);
@@ -55,6 +60,50 @@ class _give_productState extends State<give_product> {
     }
     return requests;
 
+=======
+    while (products.toString() != "[]") {
+      if (i != 2) {
+        String z = products.removeAt(0);
+        List q = z.split(",");
+        String name = q[ i ].toString().split(":")[1];
+        print(name);
+        String radius = q[ i + 1 ].toString().split(":")[1];
+        print(radius);
+        String product = q[ i + 2 ].toString().split(":")[1];
+        print(product);
+        String s = name + radius + product;
+        print(s);
+        requests.add(Product(product_text: s, Nickname: name,));
+        print("..........................");
+        print(products);
+        print(products.isNotEmpty);
+        print("......................................................");
+        i = 2;
+      }
+      if (i == 2) {
+        String z = products.removeAt(0);
+        List q = z.split(",");
+        String name = q[ i ].toString().split(":")[1];
+        print(name);
+        String radius = q[ i + 1 ].toString().split(":")[1];
+        print(radius);
+        String product = q[ i + 2 ].toString().split(":")[1];
+        print(product);
+        String s = name + radius + product;
+        print(s);
+        requests.add(Product(product_text: s, Nickname: name,));
+        print("..........................");
+        print(products);
+        print(products.isNotEmpty);
+        print("......................................................");
+      }
+
+    }
+
+
+    print("requests");
+    return requests;
+>>>>>>> a32d4af89cc690373c19f97e7628c4ddc8a92760
   }
 
   @override
@@ -72,8 +121,13 @@ class _give_productState extends State<give_product> {
                     backgroundColor: Colors.deepOrangeAccent),
                 body: Center(
                     child: ListView(
+<<<<<<< HEAD
                       children: snapshot.data as List<Widget>,
                     )));
+=======
+                  children: snapshot.data as List<Widget>,
+                )));
+>>>>>>> a32d4af89cc690373c19f97e7628c4ddc8a92760
           } else {
             return Scaffold(
               body: Center(

@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:async';
+
 import 'package:carmel_project/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'server.dart';
@@ -42,6 +45,7 @@ class Login extends StatelessWidget {
                   height: 180,
                   child: Center(
                       child: Text(
+<<<<<<< HEAD
                         "Welcome",
                         style: TextStyle(fontSize: 80, color: Color(0xD259A)),
                       ))),
@@ -76,6 +80,42 @@ class Login extends StatelessWidget {
                       )
                     ],
                   )),
+=======
+                    "Welcome",
+                    style: TextStyle(fontSize: 80, color: Color(0xD259A)),
+                  ))),
+              Container(
+                  child: Column(
+                children: [
+                  Container(
+                    child: TextFormField(
+                      validator: (value) {
+                        if (1==1) {
+                          return "this username don't exist";
+                        }
+                        return null;
+                      },
+                      controller: nameController,
+                      decoration: InputDecoration(
+                          fillColor: Colors.orange, hintText: ("nickname"), hintStyle: TextStyle(color: Colors.grey)),
+                    ),
+                    width: 200,
+                  ),
+                  SizedBox(
+                    height: 28,
+                  ),
+                  Container(
+                    child: TextField(
+                      obscureText: true,
+                      obscuringCharacter: '*',
+                      controller: passwordController,
+                      decoration: InputDecoration(hintText: "password", hintStyle: TextStyle(color: Colors.grey)),
+                    ),
+                    width: 200,
+                  )
+                ],
+              )),
+>>>>>>> a32d4af89cc690373c19f97e7628c4ddc8a92760
               SizedBox(
                 height: 38,
               ),

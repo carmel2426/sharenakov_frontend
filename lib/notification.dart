@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Future<void> createWaterReminderNotification(
     NotificationWeekAndTime notificationSchedule) async {
   await AwesomeNotifications().createNotification(
@@ -15,4 +16,18 @@ Future<void> createWaterReminderNotification(
       )
     ],
   );
+=======
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+class NotificationService {
+  static final NotificationService _notificationService =
+  NotificationService._internal();
+
+  factory NotificationService() {
+    return _notificationService;
+  }
+
+  NotificationService._internal();
+
+>>>>>>> a32d4af89cc690373c19f97e7628c4ddc8a92760
 }
