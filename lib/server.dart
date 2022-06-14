@@ -29,7 +29,6 @@ Future createData(String name, String password, String number, String latitude, 
 }
 var user_existUri = baseUrl + "user_exist";
 
-<<<<<<< HEAD
 Future<bool> user_exist4(String name) async {
   final response = await dio.post(user_existUri, data: {
     "name": name,
@@ -37,8 +36,7 @@ Future<bool> user_exist4(String name) async {
   print(response);
   return response.data;
 }
-=======
->>>>>>> a32d4af89cc690373c19f97e7628c4ddc8a92760
+
 String productUrl = baseUrl + "get_product";
 
 Future createProduct(String radius, String product, String description, String latitude, String longtitude) async {
@@ -49,26 +47,17 @@ Future createProduct(String radius, String product, String description, String l
     'latitude': latitude,
     'longtitude': longtitude
   });
-
+  print(response.data);
   return response.data;
 }
 
 String productUrl2 = baseUrl + "give_product";
 
 Future<String> getProducts() async {
-  print("1111111111111111111111111");
   final response = await Dio().get(productUrl2, queryParameters: {
-<<<<<<< HEAD
   }
+
   );
-  print("2222222222222222222222");
-  print(response.data.toString());
-  print("2222222222222222222222");
-
-  return response.data.toString();
-=======
-  });
-
   return response.data.toString();
 }
 
@@ -80,21 +69,10 @@ Future get_Number(String name) async {
   });
   print(response);
   return response.data;
->>>>>>> a32d4af89cc690373c19f97e7628c4ddc8a92760
 }
 
-var product8Uri = baseUrl + "get_number";
-
-Future get_Number(String name) async {
-  final response = await dio.post(product8Uri, data: {
-    "name": name,
-  });
-  print(response);
-  return response.data;
-}
 
 var verified_product_uri = baseUrl + "verified_product";
-
 Future verified_product(String nickname, String description, String product_text) async {
   final response = await dio.post(verified_product_uri, data: {
     "name": nickname,

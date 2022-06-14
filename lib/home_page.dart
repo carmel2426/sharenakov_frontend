@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           Container(
               decoration: BoxDecoration(color: Colors.lightBlue.withOpacity(0.2)),
               child: ElevatedButton(
-                child: Text(" get a Product"),
+                child: Text("request a Product"),
                 onPressed: () async {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => get_a_product()));
                   await pos.checkGps();
@@ -58,8 +58,8 @@ class _HomePageState extends State<HomePage> {
       ])),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          dialog(context, "Give/Get", "Give - you can give a product to the other users "
-              "Get - you can ask for a product from the other users");
+          dialog(context, "Give/Request", "Give - you can give a product to the other users "
+              "Request - you can request for a product from the other users");
         },
         child: Icon(Icons.help_outline),
         backgroundColor: Colors.deepOrange,
