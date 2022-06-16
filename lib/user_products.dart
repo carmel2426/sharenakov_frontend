@@ -2,7 +2,7 @@ import 'package:carmel_project/your_products_model.dart';
 import 'package:flutter/material.dart';
 import 'server.dart';
 import 'package:carmel_project/server.dart';
-import 'post_model.dart';
+
 
 class user_products extends StatelessWidget {
   const user_products({Key? key}) : super(key: key);
@@ -10,12 +10,10 @@ class user_products extends StatelessWidget {
   string_to_list(String s) {
     s = s.replaceAll("[", "");
     s = s.replaceAll("]", "");
-    // s = s.replaceAll(",", ".");
     List s2 = s.split("}");
     return s2;
   }
 
-  // products.toString() != "[]"
   Products_list() async {
     String x = await user_products2();
     List products = string_to_list(x);
@@ -57,8 +55,8 @@ class user_products extends StatelessWidget {
             return Scaffold(
                 appBar: AppBar(
                     title: Text(
-                      'Users Confirm',
-                      style: TextStyle(fontSize: 32, color: Colors.orange),
+                      'Approved Products',
+                      style: TextStyle(fontSize: 23, color: Colors.orange),
                     ),
                     backgroundColor: Colors.deepOrangeAccent),
                 body: Center(
@@ -75,37 +73,3 @@ class user_products extends StatelessWidget {
         });
   }
 }
-
-// }
-// class _GiveProductState extends State<GiveProduct> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         appBar: AppBar(
-//           title: Text("Give a product"),
-//         ),
-//         body: FutureBuilder<List<ProductModel>>(
-//           future: () async {
-//             LocationService service = LocationService();
-//             await service.checkGps();
-//             print("SERVICE fds fuiosdbui  $service");
-//             return await getProducts(service.lat, service.long);
-//           }(),
-//           builder: (context, snapshot) {
-//             if (snapshot.hasError || !snapshot.hasData) {
-//               return CircularProgressIndicator();
-//             }
-//
-//             List<ProductModel> products = snapshot.data!;
-//             print(products);
-//             return Column(
-//               children: products.map((e) => Product(product: e)).toList(),
-//             );
-//           },
-//         ));
-//   }
-
-////onPressed: () async{
-//                         var m = await user_products2();
-//                         print(m.toString());
-//                       },

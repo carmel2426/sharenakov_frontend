@@ -26,10 +26,8 @@ class _user_productState extends State<user_product> {
               var number = await get_Number(widget.name.toString());
               dialog(context, "Number", number.toString());
               delete_db_show_product(widget.Id);
-              // verified_product(widget.Nickname, widget.Description, widget.product_text);
-              // declined_product(widget.Id);
             },
-            icon: Icon(Icons.check_circle_outline_rounded),
+            icon: const Icon(Icons.phone),
           ),
 
 
