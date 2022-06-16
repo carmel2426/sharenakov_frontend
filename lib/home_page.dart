@@ -1,8 +1,8 @@
+import 'package:carmel_project/user_products.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'get_a_product.dart';
 import 'give_a_product.dart';
-import 'server.dart';
 import 'alert_dialog.dart';
 import 'dist.dart';
 
@@ -24,6 +24,22 @@ class _HomePageState extends State<HomePage> {
             'Start',
             style: TextStyle(fontSize: 46, color: Colors.orangeAccent),
           ),
+          actions: [
+            PopupMenuButton(
+                color: Colors.yellowAccent,
+                elevation: 20,
+                enabled: true,
+                onSelected: (value) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => user_products()));
+                },
+                itemBuilder:(context) => [
+                  PopupMenuItem(
+                    child: Text("Your Products"),
+                    value: "Your Products",
+                  ),
+                ]
+            )
+          ],
           centerTitle: true,
           backgroundColor: Colors.deepOrange),
       body: Center(
@@ -32,9 +48,9 @@ class _HomePageState extends State<HomePage> {
         Container(
             child: Column(children: [
           Container(
-              decoration: BoxDecoration(color: Colors.lightBlue.withOpacity(0.2)),
+              decoration: BoxDecoration(color: Colors.lightBlue.withOpacity(0)),
               child: ElevatedButton(
-                child: Text("Give a product"),
+                child: Text("   Give a product   "),
                 onPressed: () async {
                   //navigate to give a product
                   Navigator.push(context, MaterialPageRoute(builder: (context) => give_product()));
@@ -45,7 +61,7 @@ class _HomePageState extends State<HomePage> {
             height: 28,
           ),
           Container(
-              decoration: BoxDecoration(color: Colors.lightBlue.withOpacity(0.2)),
+              decoration: BoxDecoration(color: Colors.lightBlue.withOpacity(0)),
               child: ElevatedButton(
                 child: Text("request a Product"),
                 onPressed: () async {

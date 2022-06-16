@@ -1,16 +1,12 @@
-import 'package:carmel_project/product.dart';
-import 'package:carmel_project/server.dart';
+import 'package:carmel_project/your_products_model.dart';
 import 'package:flutter/material.dart';
-import 'dist.dart';
+import 'server.dart';
+import 'package:carmel_project/server.dart';
 import 'post_model.dart';
-import 'dart:convert';
 
-class give_product extends StatefulWidget {
-  @override
-  State<give_product> createState() => _give_productState();
-}
+class user_products extends StatelessWidget {
+  const user_products({Key? key}) : super(key: key);
 
-class _give_productState extends State<give_product> {
   string_to_list(String s) {
     s = s.replaceAll("[", "");
     s = s.replaceAll("]", "");
@@ -18,48 +14,38 @@ class _give_productState extends State<give_product> {
     List s2 = s.split("}");
     return s2;
   }
+
   // products.toString() != "[]"
   Products_list() async {
-    String x = await getProducts();
+    String x = await user_products2();
     List products = string_to_list(x);
     List<Widget> requests = [];
-    print(products);
-    print(products.isNotEmpty);
+    print(products.length > 1);
     int i = 1;
     while (products.length > 1) {
       if (i == 2) {
         String z = products.removeAt(0);
         List q = z.split(",");
-        print(q);
-        String id = q[ 1 ].toString().split(":")[1];
-        print("pppppppppppp");
-        print(id);
-        String name = q[ i ].toString().split(":")[1];
-        String radius = q[ i + 1 ].toString().split(":")[1];
-        String product = q[ i + 2 ].toString().split(":")[1];
-        String description = q[ i + 3 ].toString().split(":")[1];
-        String s = name + radius + product;
-        print(s);
-        requests.add(Product(product_text: s, Nickname: name, Description: description, Id: id,));
-        print(products.length);
+        String id = q[i - 1].toString().split(":")[1];
+        String name_get_product = q[i ].toString().split(":")[1];
+        String name_give_product = q[i + 1].toString().split(":")[1];
+        String product = q[i + 2].toString().split(":")[1];
+        String s = name_get_product + name_give_product + product;
+        requests.add(user_product(product_text: s, Id: id, name: name_give_product));
       }
       if (i != 2) {
         String z = products.removeAt(0);
         List q = z.split(",");
-        String id = q[ 0 ].toString().split(":")[1];
-        String name = q[ i ].toString().split(":")[1];
-        String radius = q[ i + 1 ].toString().split(":")[1];
-        String product = q[ i + 2 ].toString().split(":")[1];
-        String description = q[ i + 3 ].toString().split(":")[1];
-        String s = name + radius + product;
-        print(s);
-        requests.add(Product(product_text: s, Nickname: name, Description: description, Id: id,));
-        print(products.length);
+        String id = q[i - 1].toString().split(":")[1];
+        String name_get_product = q[i].toString().split(":")[1];
+        String name_give_product = q[i + 1].toString().split(":")[1];
+        String product = q[i + 2].toString().split(":")[1];
+        String s = name_get_product + name_give_product + product;
+        requests.add(user_product(product_text: s , Id: id, name: name_give_product));
         i = 2;
       }
     }
     return requests;
-
   }
 
   @override
@@ -71,14 +57,14 @@ class _give_productState extends State<give_product> {
             return Scaffold(
                 appBar: AppBar(
                     title: Text(
-                      'Product',
-                      style: TextStyle(fontSize: 46, color: Colors.orange),
+                      'Users Confirm',
+                      style: TextStyle(fontSize: 32, color: Colors.orange),
                     ),
                     backgroundColor: Colors.deepOrangeAccent),
                 body: Center(
                     child: ListView(
-                      children: snapshot.data as List<Widget>,
-                    )));
+                  children: snapshot.data as List<Widget>,
+                )));
           } else {
             return Scaffold(
               body: Center(
@@ -118,3 +104,8 @@ class _give_productState extends State<give_product> {
 //           },
 //         ));
 //   }
+
+////onPressed: () async{
+//                         var m = await user_products2();
+//                         print(m.toString());
+//                       },

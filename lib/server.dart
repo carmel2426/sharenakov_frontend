@@ -37,10 +37,10 @@ Future<bool> user_exist4(String name) async {
   return response.data;
 }
 
-String productUrl = baseUrl + "get_product";
+String get_productUri = baseUrl + "get_product";
 
 Future createProduct(String radius, String product, String description, String latitude, String longtitude) async {
-  final response = await dio.post(productUrl, data: {
+  final response = await dio.post(get_productUri, data: {
     'radius': radius,
     'product': product,
     'description': description,
@@ -51,26 +51,34 @@ Future createProduct(String radius, String product, String description, String l
   return response.data;
 }
 
-String productUrl2 = baseUrl + "give_product";
+String give_prdocutUri = baseUrl + "give_product";
 
 Future<String> getProducts() async {
-  final response = await Dio().get(productUrl2, queryParameters: {
+  final response = await Dio().get(give_prdocutUri, queryParameters: {
   }
 
   );
   return response.data.toString();
 }
 
-var product8Uri = baseUrl + "get_number";
+var get_numberUri = baseUrl + "get_number";
 
 Future get_Number(String name) async {
-  final response = await dio.post(product8Uri, data: {
+  final response = await dio.post(get_numberUri, data: {
     "name": name,
   });
   print(response);
   return response.data;
 }
 
+var user_products_uri = baseUrl + "user_products";
+
+Future<String> user_products2() async {
+  final response = await Dio().get(user_products_uri, queryParameters: {
+  }
+  );
+  return response.data.toString();
+}
 
 var verified_product_uri = baseUrl + "verified_product";
 Future verified_product(String nickname, String description, String product_text) async {
@@ -92,6 +100,17 @@ Future declined_product(String Id) async {
   print(response.data);
   return response.data;
 }
+
+var delete_db_show_product_uri = baseUrl + "delete_db_show_product";
+
+Future delete_db_show_product(String Id) async {
+  final response = await dio.post(delete_db_show_product_uri, data: {
+    "Id": Id,
+  });
+  print(response.data);
+  return response.data;
+}
+
 
 
 

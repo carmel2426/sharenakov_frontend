@@ -29,6 +29,31 @@ class LocationService {
 
   late StreamSubscription<Position> positionStream;
 
+  Future<String?> getLocationPermission() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    try {
+      serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        return "Location services are disabled.";
+      }
+    } catch (e) {
+      return 'Failed to get location';
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.deniedForever) {
+      return "Location permission are permanently denied. Cannot request permissions.";
+    } else if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+        return 'Location permission denied.';
+      }
+    }
+
+    return null;
+  }
   checkGps() async {
     servicestatus = await Geolocator.isLocationServiceEnabled();
     if (servicestatus) {

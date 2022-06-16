@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:async';
-
 import 'package:carmel_project/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'server.dart';
@@ -79,6 +78,8 @@ class Login extends StatelessWidget {
                       )
                     ],
                   )),
+              SizedBox(height: 20,),
+
 
               SizedBox(
                 width: 80,
